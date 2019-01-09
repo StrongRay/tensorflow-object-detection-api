@@ -2,7 +2,7 @@
 
 Learning about Tensorflow Object Detection API  
 
-Software:  UBUNTU 18.04, tensorflow 1.12, OpenCV 4.0.0-alpha, virtual environment
+Software:  UBUNTU 18.04, tensorflow 1.12, OpenCV 4.0.0-alpha, virtual environment, Python 3.6.7 [never ever go to 2.7]  
 Hardware:  ASUS laptop, Intel® Core™ i7-7500U CPU @ 2.70GHz × 4, GeForce 940MX/PCIe/SSE2, 12 GB memory, Microsoft 2MB USB Webcam
 
 ##  Sample videos processed with the code
