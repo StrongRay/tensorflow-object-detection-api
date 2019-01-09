@@ -1,9 +1,16 @@
 # Tensorflow Object Detection API 
 
-Learning about Tensorflow Object Detection API through "doing" instead of just "reading" someone else's code
-I learnt that Jupyter notebook has a nice feature of saving as Python Codes.  However, as we all know, displaying images off Jupyter notebook is so different from off the command line.  Also, I have not seen a webcam piece of code working off a Juypter notebook =) Some other learnings included resolving "cannot display plt off matplotlib backend " and of course some quick codes to polish up Python programming.  
+Learning about Tensorflow Object Detection API through "doing" instead of just "reading" someone else's code is perhaps the best way to learn.  This in OO is called an instance of an object.  If you can cover one model, you surely can do another and another.  The Lowest Common Denominator is perhaps non-technical trait called "love for programming"
 
-As Tensorflow 2.0 is coming up in 2019, there will be more improvements and "what's in research folder" in object-detection could be merged as a base. The surprising find is that the detection speed is quite impressive. 
+I discovered that Jupyter notebook has a nice feature of saving as Python Codes.  However, as we all know, displaying images off Jupyter notebook is so different from off the command line.  Also, I have never seen a webcam piece of code working off a Juypter notebook =) Some other learnings included resolving "cannot display plt off matplotlib backend " and of course some quick codes to polish up Python programming.  
+
+Tensorflow 2.0 is coming in 2019, there will be more improvements and "what's in research folder" in object-detection could be merged as a base. The surprising find is that the detection speed is quite impressive.
+
+A little knowledge is a dangerous thing.  You think you know but you actually don't. Then you know what you don't know and finally you find out enough to reduce the areas of unknowns.  
+
+In the 80s, it's 3 Tier Client Server Computing, then comes WebServices.  Now it's BLOCKCHAIN and AI.  BLOCKCHAIN is still lightyears away but Deep Learning is already here to stay with commercial applications.  Do you need to know "Statistics" and "Machine Algorithms" to implement Deep learning ?  It's like saying do you need to know TCP socket programming for web services inorder to implement a web services project ?  The answer is of course no. Unless you are maintaining the codes for Web LOGIC web services.  Other developers just use the high level APs.  Tensorflow alone doesn't SOLVE commerical problems.  It's a combination of UNIX skills ( and surely no commercial app is running on MacOS or Windows 10 =) DEBUGGING skills and a logical sense of approach towards Systems Integration. 
+
+Don't we love PIP3 install ? Without which, we end up paying for softwares just to try out.
 
 Software:  UBUNTU 18.04, tensorflow 1.12, OpenCV 4.0.0-alpha, virtual environment, Python 3.6.7 [never ever go to 2.7]  
 Hardware:  ASUS laptop, Intel® Core™ i7-7500U CPU @ 2.70GHz × 4, GeForce 940MX/PCIe/SSE2, 12 GB memory, Microsoft 2MB USB Webcam
