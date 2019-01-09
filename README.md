@@ -17,11 +17,11 @@ Hardware:  ASUS laptop, Intel® Core™ i7-7500U CPU @ 2.70GHz × 4, GeForce 940
 
 ##  Sample videos processed with the code
 
-A crowded Orchard Road scene of people detected
+A crowded Orchard Road with lots of people detected [original video from youtube ]
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=uIKENd5VejM" target="_blank"><img src="https://img.youtube.com/vi/uIKENd5VejM/0.jpg" alt="webcam sample capture" width="240" height="180" border="10" /></a>
 
-An expressway in Singapore
+An car expressway in Singapore [original video from youtube ]
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=6qMIArxPo3k" target="_blank"><img src="https://img.youtube.com/vi/6qMIArxPo3k/0.jpg" alt="webcam sample capture" width="240" height="180" border="10" /></a>
 
@@ -30,4 +30,23 @@ An expressway in Singapore
 
 # Brief code walkthrough
 
-To be added - but I have added comments within the code.  Should be easy to read. 
+## Preparation
+1.	Download the ssd_mobilenet_v1_coco_11/frozen_inference_graph.pb from https://github.com/datitran/object_detector_app/tree/master/object_detection/ssd_mobilenet_v1_coco_11_06_2017 into object_detection/model directory
+
+2.	Download the mscoco_label_map.pbtxt from https://github.com/datitran/object_detector_app/tree/master/object_detection/data
+Into object_detection/data directory 
+
+## Pseudocode
+
+1.	Load labels
+2.	Load Detection Graph
+3.	Activate Web Camera 
+4.	In a loop - Detect Objects - detect_objects(img, sess, detection_graph)
+5.	Display modified image with Bounding Boxes
+
+## Key Learnings
+
+a.	Somehow the default plt backend is agg and with agg, plt cannot plot to the display. Hence the need for **plt.switch_backend('tkagg')**   
+b.	Convert image via **cv2.cvtColor(img, cv2.COLOR_BGR2RGB)** before passing the image to detect.  Without this, the color is kind of BLUE-GREYISH  
+c.	Somehow, **plt.pause(0.001)** seems to use less computer cycle than cv2.waitKey(1)
+
