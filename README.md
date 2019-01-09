@@ -1,6 +1,6 @@
 # Tensorflow Object Detection API 
 
-Learning about Tensorflow Object Detection API through "doing" instead of just "reading" someone else's code is perhaps the best way to learn.  This in OO is called an instance of an object.  If you can cover one model, you surely can do another and another.  The Lowest Common Denominator is perhaps non-technical trait called "love for programming"
+Learning about Tensorflow Object Detection API through "doing" instead of just "reading" someone else's code is perhaps the best way to learn.  This in OO is called an instance of an object.  If you can cover one model, you surely can do another and another.  The Lowest Common Denominator is perhaps a non-technical trait called "the love for programming" - seeded from Charles Petzold Windows Programming in 1990.
 
 I discovered that Jupyter notebook has a nice feature of saving as Python Codes.  However, as we all know, displaying images off Jupyter notebook is so different from off the command line.  Also, I have never seen a webcam piece of code working off a Juypter notebook =) Some other learnings included resolving "cannot display plt off matplotlib backend " and of course some quick codes to polish up Python programming.  
 
