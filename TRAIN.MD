@@ -1,4 +1,4 @@
-# Training a custom object
+# Tensorflow Object Detection API (2 of 2) - Creating a custom object
 
 Train a customised object for Object Detection
 
