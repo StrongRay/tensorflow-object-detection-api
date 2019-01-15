@@ -96,7 +96,7 @@ ssd_mobilenet_v1_whale.config
 **highlighted** are the relevant parts of the config file that needs to be customised 
 
 ```
-  fine_tune_checkpoint: "**object_detection/whale/models/model/model.ckpt**"
+  fine_tune_checkpoint: "object_detection/whale/models/model/model.ckpt"
   from_detection_checkpoint: true
   load_all_detection_checkpoint_vars: true
 
@@ -181,7 +181,7 @@ Re-start the training with ONLY the model files from /whale/models/ssd_mobilenet
 from object-detection directory, execute
 
 ```whale-train```
-
+```
 2019-01-13 16:28:32.327423: I tensorflow/core/platform/cpu_feature_guard.cc:141] Your CPU supports instructions that this  TensorFlow binary was not compiled to use: AVX2 FMA 
 creating index... 
 index created! 
@@ -199,16 +199,73 @@ Pass your op to the equivalent parameter main_op instead.
 WARNING:tensorflow:From /home/kenghee/object/lib/python3.6/site-packages/tensorflow/python/estimator/estimator.py:1044:  calling SavedModelBuilder.add_meta_graph_and_variables (from tensorflow.python.saved_model.builder_impl) with legacy_init_op  is deprecated and will be removed in a future version. 
 Instructions for updating: 
 Pass your op to the equivalent parameter main_op instead. 
-
+```
 The following will be generated in ~/object-detection/object_detection/whale/models/model 
-
+```
 graph.pbtxt 
 model.ckpt-xxxx.data-00000-of-00001 
 model.ckpt-xxxx.index 
 model.ckpt-xxxx.meta 
+```
+Some observations from the training.  
 
 ![image](https://github.com/StrongRay/tensorflow-object-detection-api/blob/master/A3.png)
+Step 1855 seems to be about right.
+
 ![image](https://github.com/StrongRay/tensorflow-object-detection-api/blob/master/A4.png)
+The loss seems to level up around step 800.  Which means there is not much gain from further training.
+
 ![image](https://github.com/StrongRay/tensorflow-object-detection-api/blob/master/A5.png)
+Mean Accuracy is around 75ish. Which isn't too bad
+
 ![image](https://github.com/StrongRay/tensorflow-object-detection-api/blob/master/A6.png)
+It took almost 3 hours to reach 800+ steps.
+
 ![image](https://github.com/StrongRay/tensorflow-object-detection-api/blob/master/A7.png)
+For 2000 steps, it took 6 hours on my laptop for training ( no gCloud )
+Hence, I choose step 1888 for the frozen graph generation
+
+## 4.  Export the frozen model
+
+Exporting the model will generate the frozen inference graph for use in inference program.
+
+Reference:
+
+https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/exporting_models.md
+
+### a.   Modify whale-export to take lastest checkpoint reference 
+```
+INPUT_TYPE=image_tensor
+PIPELINE_CONFIG_PATH='/home/kenghee/object-detection/object_detection/whale/models/model/ssd_mobilenet_v1_whale.config'
+TRAINED_CKPT_PREFIX='/home/kenghee/object-detection/object_detection/whale/models/model/model.ckpt-1855'
+EXPORT_DIR='/home/kenghee/object-detection/object_detection/whale/models/model/export'
+python object_detection/export_inference_graph.py \
+    --input_type=${INPUT_TYPE} \
+    --pipeline_config_path=${PIPELINE_CONFIG_PATH} \
+    --trained_checkpoint_prefix=${TRAINED_CKPT_PREFIX} \
+    --output_directory=${EXPORT_DIR}
+```
+
+```whale-export```
+
+  MultipleGridAnchorGenerator/truediv_4 (1/1 flops)
+  MultipleGridAnchorGenerator/truediv_3 (1/1 flops)
+  MultipleGridAnchorGenerator/truediv_2 (1/1 flops)
+  MultipleGridAnchorGenerator/mul_3 (1/1 flops)
+  MultipleGridAnchorGenerator/mul_4 (1/1 flops)
+  Postprocessor/BatchMultiClassNonMaxSuppression/map/while/Less (1/1 flops)
+  MultipleGridAnchorGenerator/add_15 (1/1 flops)
+  MultipleGridAnchorGenerator/add_16 (1/1 flops)
+  MultipleGridAnchorGenerator/mul_13 (1/1 flops)
+  MultipleGridAnchorGenerator/truediv_13 (1/1 flops)
+  MultipleGridAnchorGenerator/truediv_12 (1/1 flops)
+  MultipleGridAnchorGenerator/truediv_11 (1/1 flops)
+  MultipleGridAnchorGenerator/truediv_10 (1/1 flops)
+  MultipleGridAnchorGenerator/truediv_1 (1/1 flops)
+  MultipleGridAnchorGenerator/truediv (1/1 flops)
+
+======================End of Report==========================
+2019-01-14 08:13:00.065063: I tensorflow/core/platform/cpu_feature_guard.cc:141] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
+
+Check the model directory - ~/object-detection/object_detection/whale/models/model/export
+
