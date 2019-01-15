@@ -209,21 +209,21 @@ model.ckpt-xxxx.meta
 ```
 Some observations from the training.  
 
-![image](https://github.com/StrongRay/tensorflow-object-detection-api/blob/master/A3.png)
-Step 1855 seems to be about right.
+![image](https://github.com/StrongRay/tensorflow-object-detection-api/blob/master/A3.png) 
+Step 1855 seems to be about right. 
 
-![image](https://github.com/StrongRay/tensorflow-object-detection-api/blob/master/A4.png)
-The loss seems to level up around step 800.  Which means there is not much gain from further training.
+![image](https://github.com/StrongRay/tensorflow-object-detection-api/blob/master/A4.png) 
+The loss seems to level up around step 800.  Which means there is not much gain from further training. 
 
-![image](https://github.com/StrongRay/tensorflow-object-detection-api/blob/master/A5.png)
-Mean Accuracy is around 75ish. Which isn't too bad
+![image](https://github.com/StrongRay/tensorflow-object-detection-api/blob/master/A5.png) 
+Mean Accuracy is around 75ish. Which isn't too bad 
 
-![image](https://github.com/StrongRay/tensorflow-object-detection-api/blob/master/A6.png)
-It took almost 3 hours to reach 800+ steps.
+![image](https://github.com/StrongRay/tensorflow-object-detection-api/blob/master/A6.png) 
+It took almost 3 hours to reach 800+ steps. 
 
-![image](https://github.com/StrongRay/tensorflow-object-detection-api/blob/master/A7.png)
-For 2000 steps, it took 6 hours on my laptop for training ( no gCloud )
-Hence, I choose step 1888 for the frozen graph generation
+![image](https://github.com/StrongRay/tensorflow-object-detection-api/blob/master/A7.png) 
+For 2000 steps, it took 6 hours on my laptop for training ( no gCloud ) 
+Hence, I choose step 1888 for the frozen graph generation 
 
 ## 4.  Export the frozen model
 
