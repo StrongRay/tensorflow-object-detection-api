@@ -39,7 +39,7 @@ In labelImg directory, execute python3 labelImg.py and navigate to the eval dire
 
 ![image](https://github.com/StrongRay/tensorflow-object-detection-api/blob/master/A1.png)
 
-Use  python3 xml_to_csv.py to convert the XMLs into a single CSV.  Do the same for the other directory (train). Then move the two generated .csv files over to data directory and rename each as eval_labels.csv and train_labels.csv
+Use  **python3 xml_to_csv.py** [from https://github.com/datitran/raccoon_dataset/blob/master/xml_to_csv.py] to convert the XMLs into a single CSV.  Do the same for the other directory (train). Then move the two generated .csv files over to data directory and rename each as eval_labels.csv and train_labels.csv
 
 ## 3)  Generate tf records
 
