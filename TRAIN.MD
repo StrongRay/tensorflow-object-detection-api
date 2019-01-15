@@ -9,7 +9,7 @@ Reference:
 
 Under home/object-detection/object_detection
 
-![image] https://github.com/StrongRay/tensorflow-object-detection-api/blob/master/A2.png 
+![image](https://github.com/StrongRay/tensorflow-object-detection-api/blob/master/A2.png)
 
 
 # A.   Prepare the data
