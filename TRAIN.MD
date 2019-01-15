@@ -274,7 +274,9 @@ Check the model directory - **~/object-detection/object_detection/whale/models/m
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=stheMzVTt3w" target="_blank"><img src="https://img.youtube.com/vi/stheMzVTt3w/0.jpg" alt="webcam sample capture" width="240" height="180" border="10" /></a>
 
-1.  Note that the fps is pretty slow.
-2.  Despite only plain background in each training sample, the actual videocam has a more crowded background
-3.  The hanging toy whale rotates which means various angles of the toy whale was picked up by the detector
-4.  The toy whale was picked up by the detector which to me is pretty successful given I am not a developer/programmer =)
+1.  Fps looks pretty slower than the original. Got to dig in further.
+2.  Despite having only plain background in each training sample images, the actual videocam has a more crowded background
+    and detection still occurs
+3.  The hanging toy whale rotates freely which means various angles of the toy whale was picked up by the detector
+4.  The toy whale was picked up by the detector which to me is definition of success given I am not a developer/programmer =) and I am 52 years old from the NK-USA island called Singapore =)
+
