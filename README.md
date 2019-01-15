@@ -1,4 +1,4 @@
-# Tensorflow Object Detection API 
+# Tensorflow Object Detection API (1 of 2)
 
 Learning about Tensorflow Object Detection API through "doing" instead of just "reading" someone else's code is perhaps the best way to learn.  This in OO is called an instance of an object.  If you can cover one model, you surely can do another and another.  The Lowest Common Denominator is perhaps a non-technical trait called "the love for programming" - seeded from Charles Petzold Windows Programming in 1990.
 
