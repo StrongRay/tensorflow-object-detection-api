@@ -93,9 +93,10 @@ Ensure that the ssd_mobilenet_v1_whale.config file has relative directory names 
 
 ssd_mobilenet_v1_whale.config
 
-     highlighted are the relevant parts of the config file that needs to be customised 
+**highlighted** are the relevant parts of the config file that needs to be customised 
+
 ```
-  fine_tune_checkpoint: "object_detection/whale/models/model/model.ckpt"
+  fine_tune_checkpoint: "**object_detection/whale/models/model/model.ckpt**"
   from_detection_checkpoint: true
   load_all_detection_checkpoint_vars: true
 
