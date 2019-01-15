@@ -144,7 +144,7 @@ http://download.tensorflow.org/models/object_detection/ssd_mobilenet_v1_coco_201
 
 into ~/object-detection/object_detection/whale/models
 
-To start training, copy ONLY the model files from 
+To start training, copy **ONLY** the model files from 
  /whale/models/ssd_mobilenet_v1_coco_2018_01_28 to whale/models/model
 ```
 model.ckpt.data-00000-of-00001
@@ -160,19 +160,19 @@ cd
 go back to the base directory /object-detection
 ```whale-train```
 
-You will hit the famouse **pickles** error!
+You will hit the famous **pickles** error! Google is our great friend and so is stackoverflow.  So one post suggested doing the undoable - modify the base code.  Heck! Nothing to loose, since in Tensorflow 2.0, Object Detection might not make it to the base code =)
 
 ### e.  Resolve “ can't pickle dict_values objects”
 
 Running whale-test will get you this error:
 
-list(category_index.values()), eval_dict)" to prevent error "[object detection] TypeError: can't pickle dict_values objects"
+**list(category_index.values()), eval_dict)" to prevent error "[object detection] TypeError: can't pickle dict_values objects"**
 
-The solution is to modify tensorflow/models/research/object_detection/model_lib.py 
+The solution is to **modify** tensorflow/models/research/object_detection/model_lib.py 
 
 /home/kenghee/tensorflow/models/research/object_detection/model_lib.py 
 
-around line 440 of model_lib.py change "eval_config, category_index.values(), eval_dict)" to “eval_config, list(category_index.values()), eval_dict)”
+around line 440 of model_lib.py change "eval_config, category_index.values(), eval_dict)" to “eval_config, **list(category_index.values()), eval_dict)”
 
 Re-start the training with **ONLY** the model files from /whale/models/ssd_mobilenet_v1_coco_2018_01_28 to whale/models/model
 
