@@ -57,4 +57,157 @@ python generate_tfrecord.py –csv_input=./data/eval_labels.csv  python generate
 ```
 Successfully created the TFRecords: /home/kenghee/object-detection/object_detection/whale/./data/eval.record
 
+## C.   Train the model
 
+### a.    Modify shell program for training 
+
+Next, I created a shell executable file “nano whale-train”  w a “chmod+x whale-train”
+```
+PIPELINE_CONFIG_PATH='/home/kenghee/object-detection/object_detection/whale/models/model/ssd_mobilenet_v1_whale.config'
+MODEL_DIR='/home/kenghee/object-detection/object_detection/whale/models/model'
+NUM_TRAIN_STEPS=2000
+SAMPLE_1_OF_N_EVAL_EXAMPLES=1
+python object_detection/model_main.py \
+    --pipeline_config_path=${PIPELINE_CONFIG_PATH} \
+    --model_dir=${MODEL_DIR} \
+    --num_train_steps=${NUM_TRAIN_STEPS} \
+    --sample_1_of_n_eval_examples=$SAMPLE_1_OF_N_EVAL_EXAMPLES \
+    --alsologtostderr
+```
+### b.    Create Label MAP pbtxt
+
+Create whale_label_map.pbtxt in object_detection/whale/data/label_map/
+```
+item {
+id: 1
+name: 'whale'
+}
+```
+### c.   Create a ssd_mobilenet_v1.config file
+
+Make a copy of the ssd_mobilenet_v1_pets.config from
+ 
+https://github.com/tensorflow/models/blob/master/research/object_detection/samples/configs/ssd_mobilenet_v1_pets.config
+
+Ensure that the ssd_mobilenet_v1_whale.config file has relative directory names (instead of physical file location names)
+
+ssd_mobilenet_v1_whale.config
+
+     highlighted are the relevant parts of the config file that needs to be customised 
+```
+  fine_tune_checkpoint: "object_detection/whale/models/model/model.ckpt"
+  from_detection_checkpoint: true
+  load_all_detection_checkpoint_vars: true
+
+  # Note: The below line limits the training process to 200K steps, which we
+  # empirically found to be sufficient enough to train the pets dataset. This
+  # effectively bypasses the learning rate schedule (the learning rate will
+  # never decay). Remove the below line to train indefinitely.
+
+  data_augmentation_options {
+    random_horizontal_flip {
+    }
+  }
+  data_augmentation_options {
+    ssd_random_crop {
+    }
+  }
+}
+
+train_input_reader: {
+  tf_record_input_reader {
+    input_path: "object_detection/whale/data/train.record"
+  }
+  label_map_path: "object_detection/whale/data/label_map/whale_label_map.pbtxt"
+}
+
+eval_config: {
+  metrics_set: "coco_detection_metrics"
+  num_examples: 53
+}
+
+eval_input_reader: {
+  tf_record_input_reader {
+    input_path: "object_detection/whale/data/test.record"
+  }
+  label_map_path: "object_detection/whale/data/label_map/whale_label_map.pbtxt"
+  shuffle: false
+  num_readers: 1
+}
+```
+### d.   Download the ssd_mobilenet_v1_coco_2018_01_28 file
+
+The idea here is that you are not training a model from scratch and is making use of a known model from research.  Download the following model files
+
+http://download.tensorflow.org/models/object_detection/ssd_mobilenet_v1_coco_2018_01_28.tar.gz
+
+into ~/object-detection/object_detection/whale/models
+
+To start training, copy ONLY the model files from 
+ /whale/models/ssd_mobilenet_v1_coco_2018_01_28 to whale/models/model
+```
+model.ckpt.data-00000-of-00001
+model.ckpt.index
+model.ckpt.meta
+```
+Somehow, I cannot have the checkpoint files in the directory before starting training, otherwise the training will fail.  This is because, the checkpoint file that is copied from ssd_mobilenet was trained using a different dataset.
+
+go back to home
+cd 
+```source object/bin/activate``` [I had already set up lots of pre-requsite PIP2 modules]
+
+go back to the base directory /object-detection
+```whale-train```
+
+You will hit pickles !
+
+### e.  Resolve “ can't pickle dict_values objects”
+
+Running whale-test will get you this error:
+
+list(category_index.values()), eval_dict)" to prevent error "[object detection] TypeError: can't pickle dict_values objects"
+
+The solution is to modify tensorflow/models/research/object_detection/model_lib.py 
+
+/home/kenghee/tensorflow/models/research/object_detection/model_lib.py 
+
+around line 440 of model_lib.py change "eval_config, category_index.values(), eval_dict)" to “eval_config, list(category_index.values()), eval_dict)”
+
+Re-start the training with ONLY the model files from /whale/models/ssd_mobilenet_v1_coco_2018_01_28 to whale/models/model
+
+### f.  Train the model
+
+from object-detection directory, execute
+
+```whale-train```
+
+2019-01-13 16:28:32.327423: I tensorflow/core/platform/cpu_feature_guard.cc:141] Your CPU supports instructions that this  TensorFlow binary was not compiled to use: AVX2 FMA 
+creating index... 
+index created! 
+creating index... 
+index created! 
+Running per image evaluation... 
+Evaluate annotation type *bbox* 
+DONE (t=0.35s). 
+Accumulating evaluation results... 
+...
+...
+WARNING:tensorflow:From /home/kenghee/object/lib/python3.6/site-packages/tensorflow/python/estimator/estimator.py:1044:  calling SavedModelBuilder.add_meta_graph_and_variables (from tensorflow.python.saved_model.builder_impl) with legacy_init_op  is deprecated and will be removed in a future version. 
+Instructions for updating: 
+Pass your op to the equivalent parameter main_op instead. 
+WARNING:tensorflow:From /home/kenghee/object/lib/python3.6/site-packages/tensorflow/python/estimator/estimator.py:1044:  calling SavedModelBuilder.add_meta_graph_and_variables (from tensorflow.python.saved_model.builder_impl) with legacy_init_op  is deprecated and will be removed in a future version. 
+Instructions for updating: 
+Pass your op to the equivalent parameter main_op instead. 
+
+The following will be generated in ~/object-detection/object_detection/whale/models/model 
+
+graph.pbtxt 
+model.ckpt-xxxx.data-00000-of-00001 
+model.ckpt-xxxx.index 
+model.ckpt-xxxx.meta 
+
+![image](https://github.com/StrongRay/tensorflow-object-detection-api/blob/master/A3.png)
+![image](https://github.com/StrongRay/tensorflow-object-detection-api/blob/master/A4.png)
+![image](https://github.com/StrongRay/tensorflow-object-detection-api/blob/master/A5.png)
+![image](https://github.com/StrongRay/tensorflow-object-detection-api/blob/master/A6.png)
+![image](https://github.com/StrongRay/tensorflow-object-detection-api/blob/master/A7.png)
