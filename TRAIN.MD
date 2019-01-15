@@ -93,7 +93,7 @@ Ensure that the ssd_mobilenet_v1_whale.config file has relative directory names 
 
 ssd_mobilenet_v1_whale.config
 
-**highlighted** are the relevant parts of the config file that needs to be customised 
+The relevant parts of the config file that needs to be customised is as follows 
 
 ```
   fine_tune_checkpoint: "object_detection/whale/models/model/model.ckpt"
@@ -160,7 +160,7 @@ cd
 go back to the base directory /object-detection
 ```whale-train```
 
-You will hit pickles !
+You will hit the famouse **pickles** error!
 
 ### e.  Resolve “ can't pickle dict_values objects”
 
@@ -174,7 +174,7 @@ The solution is to modify tensorflow/models/research/object_detection/model_lib.
 
 around line 440 of model_lib.py change "eval_config, category_index.values(), eval_dict)" to “eval_config, list(category_index.values()), eval_dict)”
 
-Re-start the training with ONLY the model files from /whale/models/ssd_mobilenet_v1_coco_2018_01_28 to whale/models/model
+Re-start the training with **ONLY** the model files from /whale/models/ssd_mobilenet_v1_coco_2018_01_28 to whale/models/model
 
 ### f.  Train the model
 
@@ -267,5 +267,12 @@ python object_detection/export_inference_graph.py \
 ======================End of Report==========================
 2019-01-14 08:13:00.065063: I tensorflow/core/platform/cpu_feature_guard.cc:141] Your CPU supports instructions that this TensorFlow binary was not compiled to use: AVX2 FMA
 
-Check the model directory - ~/object-detection/object_detection/whale/models/model/export
+Check the model directory - **~/object-detection/object_detection/whale/models/model/export**
 
+# Moment of truth
+
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=stheMzVTt3w" target="_blank"><img src="https://img.youtube.com/vi/stheMzVTt3w/0.jpg" alt="webcam sample capture" width="240" height="180" border="10" /></a>
+
+1.  Note that the fps is pretty slow.
+2.  Despite only plain background in each training sample, the actual videocam has a more crowded background
+3.  The toy whale was picked up by the detector which to me is pretty successful given I am not a programmer =)
