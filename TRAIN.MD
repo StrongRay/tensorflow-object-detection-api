@@ -206,13 +206,15 @@ model.ckpt-xxxx.meta
 
 ## D.   Look at the results
 
-If you cannot measure the outcome, you cannot improve.  In the same way, Training is science and not art.  Tensorboard is required to look at the training results.  In the model directory execute **tensorboard --logdir=.**
+> What you cannot measure, you can never improve.  
+
+Training is science and not art. Use Tensorboard to look at the training results. Technically, you can view the results on the fly by opening a terminal window and issuing the same command. In the model directory execute **tensorboard --logdir=.**
 
 Look at some observations from the training. [ There are still many graphs that I can't seem to make sense of ]  
 
 ![image](https://github.com/StrongRay/tensorflow-object-detection-api/blob/master/images/A3.png) 
  
- Step 1855 seems to be detecting right.  But the same point could have been reached much earlier. 
+ Step 1855 seems to be detecting right.  However, this level of detection could have been also reached much earlier. 
 
 ![image](https://github.com/StrongRay/tensorflow-object-detection-api/blob/master/images/A4.png) 
  
