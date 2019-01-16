@@ -93,17 +93,11 @@ Ensure that the ssd_mobilenet_v1_whale.config file has relative directory names 
 
 ssd_mobilenet_v1_whale.config
 
-The relevant parts of the config file that needs to be customised is as follows 
+The relevant parts of the config file that needs to be customised is **highlighted** as follows 
 
-```
-  fine_tune_checkpoint: "object_detection/whale/models/model/model.ckpt"
+  fine_tune_checkpoint: **"object_detection/whale/models/model/model.ckpt"**
   from_detection_checkpoint: true
   load_all_detection_checkpoint_vars: true
-
-  # Note: The below line limits the training process to 200K steps, which we
-  # empirically found to be sufficient enough to train the pets dataset. This
-  # effectively bypasses the learning rate schedule (the learning rate will
-  # never decay). Remove the below line to train indefinitely.
 
   data_augmentation_options {
     random_horizontal_flip {
@@ -113,29 +107,29 @@ The relevant parts of the config file that needs to be customised is as follows
     ssd_random_crop {
     }
   }
-}
+ }
 
-train_input_reader: {
-  tf_record_input_reader {
-    input_path: "object_detection/whale/data/train.record"
-  }
-  label_map_path: "object_detection/whale/data/label_map/whale_label_map.pbtxt"
-}
+ train_input_reader: {
+   tf_record_input_reader {
+     input_path: **"object_detection/whale/data/train.record"**
+   }
+   label_map_path: **"object_detection/whale/data/label_map/whale_label_map.pbtxt" **
+ }
 
-eval_config: {
-  metrics_set: "coco_detection_metrics"
-  num_examples: 53
-}
+ eval_config: {
+   metrics_set: "coco_detection_metrics"
+   num_examples: 53
+ }
 
-eval_input_reader: {
-  tf_record_input_reader {
-    input_path: "object_detection/whale/data/test.record"
-  }
-  label_map_path: "object_detection/whale/data/label_map/whale_label_map.pbtxt"
+ eval_input_reader: {
+   tf_record_input_reader {
+     input_path: **"object_detection/whale/data/test.record"**
+   }
+  label_map_path: **"object_detection/whale/data/label_map/whale_label_map.pbtxt"**
   shuffle: false
   num_readers: 1
-}
-```
+ }
+
 ### d.   Download the ssd_mobilenet_v1_coco_2018_01_28 file
 
 The idea here is that you are not training a model from scratch and is making use of a known model from research.  Download the following model files
@@ -285,7 +279,8 @@ Check the model directory - **~/object-detection/object_detection/whale/models/m
 
 1.  Fps looks pretty slower than the original. Got to dig in further.
 2.  Despite having only plain background in each training sample images, the actual videocam has a more crowded background
-    and detection still occurs
-3.  The hanging toy whale rotates freely which means various angles of the toy whale was picked up by the detector
-4.  The toy whale was picked up by the detector which to me is definition of success given I am not a developer/programmer =) and I am 52 years old from the NK-USA island called Singapore =)
+    and detection still occurs.  However, I Realised that the training images were from a fixed distance, which meant that
+    if the size is bigger or under different lighting condition, the object will not be detected.
+3.  The hanging toy whale rotates freely which means various angles of the toy whale was picked up by the detector.  
+4.  The toy whale was picked up by the detector which to me is definition of success given I am not a developer/programmer
 
