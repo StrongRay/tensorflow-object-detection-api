@@ -194,18 +194,25 @@ WARNING:tensorflow:From /home/kenghee/object/lib/python3.6/site-packages/tensorf
 Instructions for updating: 
 Pass your op to the equivalent parameter main_op instead. 
 ```
-The following will be generated in ~/object-detection/object_detection/whale/models/model 
+Note that the full training time is determined by NUM_TRAIN_STEPS=**2000** When it ended properly, the above few lines will appear on your terminal.  Making Train Steps = 20 meant that there are only 20 steps in training and the model is not sufficiently trained.  If you put 20000, you can go sleep a few days or unless you use TPU on GCLOUD.
+
+The following will be generated in ~/object-detection/object_detection/whale/models/model, where xxxx is a number for the training number.
 ```
 graph.pbtxt 
 model.ckpt-xxxx.data-00000-of-00001 
 model.ckpt-xxxx.index 
 model.ckpt-xxxx.meta 
 ```
-Some observations from the training.  
+
+## D.   Look at the results
+
+If you cannot measure the outcome, you cannot improve.  In the same way, Training is science and not art.  Tensorboard is the view of the training results.  In the model directory execute **tensorboard --logdir=.**
+
+Look at some observations from the training. [ There are still many graphs that doesn't make sense to me ]  
 
 ![image](https://github.com/StrongRay/tensorflow-object-detection-api/blob/master/A3.png) 
  
- Step 1855 seems to be detecting right. 
+ Step 1855 seems to be detecting right.  But the same point could have been reached much earlier. 
 
 ![image](https://github.com/StrongRay/tensorflow-object-detection-api/blob/master/A4.png) 
  
@@ -277,10 +284,12 @@ Check the model directory - **~/object-detection/object_detection/whale/models/m
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=stheMzVTt3w" target="_blank"><img src="https://img.youtube.com/vi/stheMzVTt3w/0.jpg" alt="webcam sample capture" width="240" height="180" border="10" /></a>
 
-1.  Fps looks pretty slower than the original. Got to dig in further.
+1.  The Fps feels slower than the raw untrained model.  Got to examine further.
 2.  Despite having only plain background in each training sample images, the actual videocam has a more crowded background
-    and detection still occurs.  However, I Realised that the training images were from a fixed distance, which meant that
-    if the size is bigger or under different lighting condition, the object will not be detected.
+    and detection still occurs.  However, I realised that the training images were from a fixed distance, which meant that
+    if the size of the toy whale is bigger or under darker lighting condition, the object will not be detected.
 3.  The hanging toy whale rotates freely which means various angles of the toy whale was picked up by the detector.  
 4.  The toy whale was picked up by the detector which to me is definition of success given I am not a developer/programmer
+
+Enjoy.  
 
