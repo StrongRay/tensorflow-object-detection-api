@@ -9,7 +9,7 @@ Reference:
 
 Under home/object-detection/object_detection
 
-![image](https://github.com/StrongRay/tensorflow-object-detection-api/blob/master/A2.png)
+![image](https://github.com/StrongRay/tensorflow-object-detection-api/blob/master/images/A2.png)
 
 
 # A.   Prepare the data
@@ -37,7 +37,7 @@ make qt5py3
 
 In labelImg directory, execute python3 labelImg.py and navigate to the eval directory and process each image by creating a rectbox and saving it
 
-![image](https://github.com/StrongRay/tensorflow-object-detection-api/blob/master/A1.png)
+![image](https://github.com/StrongRay/tensorflow-object-detection-api/blob/master/images/A1.png)
 
 Use  **python3 xml_to_csv.py** [from https://github.com/datitran/raccoon_dataset/blob/master/xml_to_csv.py] to convert the XMLs into a single CSV.  Do the same for the other directory (train). Then move the two generated .csv files over to data directory and rename each as eval_labels.csv and train_labels.csv
 
@@ -206,28 +206,28 @@ model.ckpt-xxxx.meta
 
 ## D.   Look at the results
 
-If you cannot measure the outcome, you cannot improve.  In the same way, Training is science and not art.  Tensorboard is the view of the training results.  In the model directory execute **tensorboard --logdir=.**
+If you cannot measure the outcome, you cannot improve.  In the same way, Training is science and not art.  Tensorboard is required to look at the training results.  In the model directory execute **tensorboard --logdir=.**
 
-Look at some observations from the training. [ There are still many graphs that doesn't make sense to me ]  
+Look at some observations from the training. [ There are still many graphs that I can't seem to make sense of ]  
 
-![image](https://github.com/StrongRay/tensorflow-object-detection-api/blob/master/A3.png) 
+![image](https://github.com/StrongRay/tensorflow-object-detection-api/blob/master/images/A3.png) 
  
  Step 1855 seems to be detecting right.  But the same point could have been reached much earlier. 
 
-![image](https://github.com/StrongRay/tensorflow-object-detection-api/blob/master/A4.png) 
+![image](https://github.com/StrongRay/tensorflow-object-detection-api/blob/master/images/A4.png) 
  
  The loss seems to level up around step 800.  Which means there is not much gain from further training. So it's a waste of
  time to keep training with little gain.  I wonder if there is a keras equivalent of EarlyStopping.
 
-![image](https://github.com/StrongRay/tensorflow-object-detection-api/blob/master/A5.png) 
+![image](https://github.com/StrongRay/tensorflow-object-detection-api/blob/master/images/A5.png) 
  
  Mean Accuracy is around 75ish. Which isn't too bad 
 
-![image](https://github.com/StrongRay/tensorflow-object-detection-api/blob/master/A6.png) 
+![image](https://github.com/StrongRay/tensorflow-object-detection-api/blob/master/images/A6.png) 
  
  It took almost 3 hours to reach 800+ steps. 
 
-![image](https://github.com/StrongRay/tensorflow-object-detection-api/blob/master/A7.png) 
+![image](https://github.com/StrongRay/tensorflow-object-detection-api/blob/master/images/A7.png) 
  
  For 2000 steps, it took 6 hours on my laptop for training ( no gCloud ) 
  
