@@ -118,7 +118,7 @@ The relevant parts of the config file that needs to be customised is **highlight
 
  eval_config: {
    metrics_set: "coco_detection_metrics"
-   num_examples: 53
+   num_examples: **53**
  }
 
  eval_input_reader: {
@@ -283,6 +283,8 @@ python object_detection/export_inference_graph.py \
 Check the model directory - **~/object-detection/object_detection/whale/models/model/export**
 
 # Moment of truth
+
+I am assuming you know how to update the generated graph file and run O3.py with the updated graph file.
 
 <a href="http://www.youtube.com/watch?feature=player_embedded&v=stheMzVTt3w" target="_blank"><img src="https://img.youtube.com/vi/stheMzVTt3w/0.jpg" alt="webcam sample capture" width="240" height="180" border="10" /></a>
 
