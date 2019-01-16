@@ -50,4 +50,4 @@ a.	Somehow the default plt backend is agg and with agg, plt cannot plot to the d
 b.	Convert image via **cv2.cvtColor(img, cv2.COLOR_BGR2RGB)** before passing the image to detect.  Without this, the color is kind of BLUE-GREYISH  
 c.	Somehow, **plt.pause(0.001)** seems to use less computer cycle than cv2.waitKey(1)
 
-Next, look at the [training of a custom object](https://github.com/StrongRay/tensorflow-object-detection-api/blob/master/TRAIN.MD)
+Next, look at how I go about [training of a custom object](https://github.com/StrongRay/tensorflow-object-detection-api/blob/master/TRAIN.MD)
